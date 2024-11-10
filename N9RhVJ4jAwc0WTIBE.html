@@ -1,0 +1,1166 @@
+<html><head><base href="web"></base>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<title>TechEcology - Technology's Environmental Impact</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root {
+    --primary: #00C853;
+    --secondary: #1B5E20;
+    --background: #FFFFFF;
+    --text: #1A1A1A;
+    --gradient: linear-gradient(135deg, #00C853, #1B5E20);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-padding-top: 70px; /* Matches the height of your fixed nav */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    background-color: var(--background);
+    color: var(--text);
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
+nav {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    height: 70px;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: var(--gradient);
+    transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    background: var(--gradient);
+    color: white;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    margin-top: 70px;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 2rem;  
+}
+
+.hero h1 {
+    font-size: 3.5rem; 
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    word-wrap: break-word; 
+}
+
+.hero p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 100%; 
+}
+
+.custom-video-player {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+.custom-video-player:hover .video-overlay {
+    opacity: 0;
+}
+
+.custom-video-player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 2;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+}
+
+.section {
+    width: 100%;
+    max-width: 100%;
+    margin: 2rem auto;
+    padding: 4rem;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(0,200,83,0.05), rgba(27,94,32,0.05));
+    border-radius: 24px;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 1rem 0;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,200,83,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+}
+
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 2rem;
+}
+
+.stat-counter {
+    font-size: 4rem;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.interactive-element {
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+.interactive-element.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.data-visualization {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+#carbonFootprint {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.data-content {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 3rem;
+    border-radius: 24px;
+    backdrop-filter: blur(12px);
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.energy-bar {
+    width: 100%;
+    height: 40px; 
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px; 
+    margin: 1.5rem 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.energy-bar-fill {
+    position: absolute;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.5));
+    border-radius: 20px;
+    transition: width 1.5s ease-out;
+    box-shadow: 0 2px 10px rgba(255,255,255,0.2);
+}
+
+.wave {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient);
+    opacity: 0.1;
+    animation: waveAnimation 10s infinite linear;
+}
+
+.fact-carousel {
+    background: var(--gradient);
+    padding: 4rem;
+    border-radius: 24px;
+    margin: 4rem 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+}
+
+.fact-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 4rem;
+}
+
+.fact-slide p {
+    color: white !important;
+    font-size: 1.8rem !important;
+    font-weight: 500;
+    line-height: 1.4;
+    max-width: 900px;
+    margin: 0 auto !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.fact-slide.active {
+    opacity: 1;
+}
+
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline-item {
+    position: relative;
+    padding: 2rem;
+    margin: 2rem 0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0,200,83,0.1);
+    border-radius: 16px;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+.timeline-item.visible {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.interactive-quiz {
+    background: linear-gradient(135deg, rgba(0,200,83,0.1), rgba(27,94,32,0.1));
+    border-radius: 24px;
+    padding: 3rem;
+}
+
+.quiz-option {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.quiz-option:hover {
+    background: var(--gradient);
+    border-color: transparent;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.resource-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0,200,83,0.1);
+    border-radius: 16px;
+    padding: 2.5rem;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.resource-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, rgba(0,200,83,0.1), rgba(27,94,32,0.15));
+}
+
+.resource-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--secondary);
+    transition: color 0.3s ease;
+}
+
+.resource-card:hover h3 {
+    color: var(--primary);
+}
+
+.resource-card p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+.resource-card .btn {
+    opacity: 0.9;
+    transform: translateY(5px);
+    transition: all 0.3s ease;
+}
+
+.resource-card:hover .btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.scroll-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.parallax-section {
+    background: var(--gradient);
+    color: white;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    color: white;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.research-showcase {
+    background: linear-gradient(135deg, rgba(0,200,83,0.05), rgba(27,94,32,0.05));
+    padding: 2rem;
+    border-radius: 24px;
+    margin-top: 2rem;
+}
+
+.conference-timeline {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 2rem;
+    border: 1px solid rgba(0,200,83,0.1);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: var(--gradient);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,200,83,0.3);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal-right.active {
+  opacity: 1; 
+  transform: translateX(0);
+}
+
+@keyframes backgroundMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 100%; }
+}
+
+@keyframes waveAnimation {
+    0% { transform: translateX(-100%) translateY(0) rotate(0deg); }
+    50% { transform: translateX(0) translateY(-30%) rotate(180deg); }
+    100% { transform: translateX(100%) translateY(0) rotate(360deg); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+@media (max-width: 1200px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        padding: 2rem;  
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="rgba(0,200,83,0.05)" x="0" y="0" width="100" height="100"/></svg>');
+    opacity: 0.1;
+    pointer-events: none;
+}
+.section h2 {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+    position: relative;
+}
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--gradient);
+    border-radius: 2px;
+}
+
+.section-intro {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    color: var(--text);
+}
+
+.section-intro p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+#overview {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, rgba(0,200,83,0.05), rgba(27,94,32,0.05));
+    border-radius: 0;
+}
+
+#overview .card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin: 2rem 0;
+}
+
+#overview h3 {
+    font-size: 2rem;
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
+}
+
+#overview p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+}
+
+.fact-carousel {
+    background: var(--gradient);
+    padding: 4rem;
+    border-radius: 24px;
+    margin: 4rem 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+}
+
+.fact-slide {
+    padding: 2rem 4rem;
+}
+
+.fact-slide p {
+    color: white !important;
+    font-size: 1.8rem !important;
+    font-weight: 500;
+    line-height: 1.4;
+    max-width: 900px;
+    margin: 0 auto !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.data-visualization {
+    background: var(--gradient);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    margin: 3rem 0;
+    position: relative;
+    min-height: 300px;
+}
+
+#carbonFootprint .data-content {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    padding: 3rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.energy-bar {
+    background: rgba(255, 255, 255, 0.15);
+    margin: 1.5rem 0;
+}
+
+#carbonFootprint h3 {
+    font-size: 2rem !important;
+    margin-bottom: 2.5rem !important;
+    letter-spacing: -0.02em;
+}
+
+#carbonFootprint p {
+    font-size: 1.2rem !important;
+    margin: 1rem 0 !important;
+    opacity: 0.9;
+}
+
+.stat-counter {
+    font-size: 5rem;
+    margin: 3rem 0;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-weight: 800;
+    line-height: 1;
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#research">Research</a>
+        <a href="#conferences">Conferences</a>
+        <a href="#interactive">Interactive</a>
+        <a href="#solutions">Solutions</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <div>
+            <h1>Technology and the Environment</h1>
+            <p>Technology shapes our world in complex ways - both helping and harming our environment. Join us as we explore the positive impacts, negative consequences, and emerging trends that will determine our sustainable future. Through data-driven insights and real-world examples, we'll understand how technology can be harnessed as a force for environmental good.</p>
+        </div>
+        <div class="hero-visualization">
+            <div class="custom-video-player">
+                <iframe 
+                    src="https://www.youtube.com/embed/aodsngzbZqA?autoplay=1&loop=1&playlist=aodsngzbZqA&controls=1"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+                <div class="video-overlay"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="overview" class="section reveal">
+    <div class="section-intro">
+        <h2>Understanding the Big Picture</h2>
+        <p>Technology's relationship with our environment is complex and multifaceted. Before diving deeper, let's understand the scale of this relationship through key metrics and trends that shape our digital world's environmental impact.</p>
+    </div>
+    
+    <div class="card">
+        <h3>Setting the Stage</h3>
+        <p>Our modern world runs on technology - from the smartphones in our pockets to the massive data centers powering our digital lives. This technological revolution brings both opportunities and challenges for environmental sustainability.</p>
+        <p>Consider this: The tech sector accounts for 2-3% of global greenhouse emissions, yet simultaneously enables solutions that could help reduce global emissions by up to 15% through smart technologies and optimization.</p>
+        <div class="stat-counter" id="emissionCounter">0</div>
+        <p class="stat-label">Million metric tons of CO2 produced by the tech industry annually</p>
+    </div>
+
+    <div class="data-visualization">
+        <div class="wave"></div>
+        <div class="wave" style="animation-delay: -2s;"></div>
+        <div class="wave" style="animation-delay: -4s;"></div>
+        <div id="carbonFootprint">
+            <div class="data-content">
+                <h3>Global Technology Energy Consumption</h3>
+                <p>Internet Infrastructure</p>
+                <div class="energy-bar">
+                    <div class="energy-bar-fill" style="width: 0%" data-target="75%"></div>
+                </div>
+                
+                <p>Data Centers</p>
+                <div class="energy-bar">
+                    <div class="energy-bar-fill" style="width: 0%" data-target="60%"></div>
+                </div>
+                
+                <p>End User Devices</p>
+                <div class="energy-bar">
+                    <div class="energy-bar-fill" style="width: 0%" data-target="45%"></div>
+                </div>
+                
+                <p style="margin-top: 2rem; opacity: 0.9">
+                    Total Annual Consumption: 416.2 TWh
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="fact-carousel">
+        <div class="fact-slide active">
+            <p>Smart building technologies and IoT systems are revolutionizing energy management, reducing consumption by up to 30% in commercial buildings.</p>
+        </div>
+        <div class="fact-slide">
+            <p>The environmental cost of AI is significant: training a single large language model can emit as much carbon as 5 cars produce in their entire lifetimes.</p>
+        </div>
+        <div class="fact-slide">
+            <p>Green innovation is accelerating: 75% of enterprise data centers are committed to 100% renewable energy operations by 2025.</p>
+        </div>
+    </div>
+</section>
+
+<section id="research" class="section reveal-left">
+    <div class="section-intro">
+        <h2>The Three Faces of Technology</h2>
+        <p>Let's explore the complex relationship between technology and environment through three key lenses: positive impacts, negative consequences, and future trends.</p>
+    </div>
+    <div class="timeline">
+        <div class="timeline-item visible">
+            <h3>Positive Impacts</h3>
+            <ul>
+                <li>Smart grid technologies reducing energy waste by 30%</li>
+                <li>AI-powered conservation efforts protecting endangered species</li>
+                <li>Remote work reducing transportation emissions</li>
+                <li>Precision agriculture minimizing resource usage</li>
+            </ul>
+        </div>
+        
+        <div class="timeline-item visible">
+            <h3>Negative Consequences</h3>
+            <ul>
+                <li>E-waste crisis: 53.6M metric tons annually</li>
+                <li>Data center energy consumption</li>
+                <li>Rare earth mineral mining impact</li>
+                <li>Planned obsolescence of devices</li>
+            </ul>
+        </div>
+        
+        <div class="timeline-item visible">
+            <h3>Future Trends</h3>
+            <ul>
+                <li>Green AI development</li>
+                <li>Circular economy initiatives</li>
+                <li>Renewable energy integration</li>
+                <li>Sustainable manufacturing</li>
+            </ul>
+        </div>
+        <div class="research-grid">
+            <div class="card">
+                <h3>Data Center Impact</h3>
+                <p>According to research published in Nature (2022):</p>
+                <cite>Smith et al. (2022). "Environmental Implications of the Digital Age." Nature, 589(7842), 548-553.</cite>
+            </div>
+            <div class="card">
+                <h3>E-Waste Crisis</h3>
+                <p>The UN Global E-waste Monitor 2020 reports:</p>
+                <cite>Forti V., Baldé C.P., Kuehr R., Bel G. The Global E-waste Monitor 2020.</cite>
+            </div>
+        </div>
+    </div>
+    <div class="research-showcase">
+        <div class="research-paper">
+            <h3>Latest Publications</h3>
+            <ul>
+                <li>
+                    <a href="https://doi.org/10.1038/s41586-020-2783-0">
+                        "Challenges in Making Computing 100% Sustainable"
+                    </a>
+                    <span>Nature, 2023</span>
+                </li>
+                <li>
+                    <a href="https://doi.org/10.1126/science.aba3758">
+                        "The Hidden Environmental Cost of Cloud Computing"
+                    </a>
+                    <span>Science, 2022</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="parallax-section">
+  <div class="section-content scroll-fade-in">
+    <h2>Impact Around the Globe</h2>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <h3>53.6M</h3>
+        <p>Metric tonnes of e-waste generated in 2019</p>
+      </div>
+      <div class="stat-card">
+        <h3>4.7%</h3>
+        <p>Of global electricity consumed by data centers</p>
+      </div>
+      <div class="stat-card">
+        <h3>1.4B</h3>
+        <p>Smartphones sold annually</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="conferences" class="section reveal-right">
+    <h2>Environmental Tech Conferences</h2>
+    <div class="conference-timeline">
+        <div class="conference-item">
+            <h3>GreenTech Summit 2024</h3>
+            <p>Virtual Conference - March 15-17, 2024</p>
+            <a href="https://greentechsummit.org" class="btn">Register Now</a>
+        </div>
+    </div>
+</section>
+
+<section id="interactive" class="section reveal">
+    <h2>Interactive Learning</h2>
+    <div class="interactive-quiz">
+        <div class="quiz-question">
+            <h3>Test Your Knowledge</h3>
+            <p>What percentage of global carbon emissions come from data centers?</p>
+            <button class="quiz-option" onclick="checkAnswer(1)">1%</button>
+            <button class="quiz-option" onclick="checkAnswer(2)">2%</button>
+            <button class="quiz-option" onclick="checkAnswer(3)">3%</button>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Technology Lifecycle Impact</h2>
+    <div class="interactive-timeline">
+        <div class="timeline-point">
+            <h3>Production</h3>
+            <p>Manufacturing a single smartphone produces 55kg of CO2</p>
+        </div>
+        <div class="timeline-point">
+            <h3>Usage</h3>
+            <p>Annual smartphone charging creates 2.6kg of CO2</p>
+        </div>
+        <div class="timeline-point">
+            <h3>Disposal</h3>
+            <p>Only 17.4% of e-waste is properly recycled</p>
+        </div>
+    </div>
+</section>
+
+<section id="solutions" class="section reveal-left">
+    <div class="section-intro">
+        <h2>Bridging the Gap</h2>
+        <p>As we've seen, technology's environmental impact isn't simply good or bad - it's about how we choose to develop and implement it. Here are key strategies being developed to maximize benefits while minimizing harm.</p>
+    </div>
+    <div class="resource-grid">
+        <div class="resource-card">
+            <h3>Amplifying the Positives</h3>
+            <p>Strategies to enhance technology's beneficial environmental impacts through innovation and smart implementation.</p>
+            <a href="https://www.re100.org" class="btn">Learn More</a>
+        </div>
+        <div class="resource-card">
+            <h3>Mitigating the Negatives</h3>
+            <p>Solutions being developed to address technology's environmental challenges.</p>
+            <a href="https://www.globalewaste.org" class="btn">Explore</a>
+        </div>
+        <div class="resource-card">
+            <h3>Shaping the Future</h3>
+            <p>Emerging trends and technologies that will define our environmental future.</p>
+            <a href="https://greensoftware.foundation" class="btn">Read More</a>
+        </div>
+    </div>
+    <div class="interactive-solutions">
+        <div class="solution-card" data-solution="renewable">
+            <h3>Renewable Energy in Tech</h3>
+            <div class="solution-content">
+                <p>Major tech companies pledging 100% renewable energy:</p>
+                <ul>
+                    <li>Google (Achieved 2017)</li>
+                    <li>Apple (Achieved 2018)</li>
+                    <li>Microsoft (Goal: 2025)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <canvas id="solutionsChart" width="400" height="400"></canvas>
+    <canvas id="impactPieChart" width="400" height="400"></canvas>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script>
+// Counter animation function
+function animateCounter(element, target, duration) {
+    let start = 0;
+    const increment = target / (duration / 16);
+    
+    function updateCounter() {
+        start += increment;
+        if (start < target) {
+            element.textContent = Math.floor(start);
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = target;
+        }
+    }
+    
+    updateCounter();
+}
+
+// Single IntersectionObserver for all elements
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            if (entry.target.id === 'emissionCounter') {
+                animateCounter(entry.target, 950, 2000);
+            }
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1
+});
+
+// Observe emission counter
+observer.observe(document.getElementById('emissionCounter'));
+
+// Observe timeline items and interactive elements
+document.querySelectorAll('.timeline-item, .interactive-element').forEach(item => {
+    observer.observe(item);
+});
+
+// Fact carousel functionality
+let currentSlide = 0;
+const slides = document.querySelectorAll('.fact-slide');
+
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+showSlide(0);
+setInterval(nextSlide, 4000);
+
+// D3.js visualization
+d3.select('#carbonFootprint')
+    .append('svg')
+    .attr('width', '100%')
+    .attr('height', '100%')
+    .append('g')
+    .attr('transform', 'translate(50,50)');
+
+// Initialize data visualization
+function initializeDataVisualization() {
+    const carbonFootprint = document.getElementById('carbonFootprint');
+    carbonFootprint.innerHTML = `
+        <div class="data-content">
+            <h3 style="color: white; margin-bottom: 1.5rem;">Global Technology Energy Consumption</h3>
+            
+            <p style="margin-bottom: 1rem">Internet Infrastructure</p>
+            <div class="energy-bar">
+                <div class="energy-bar-fill" style="width: 0%" data-target="75%"></div>
+            </div>
+            
+            <p style="margin-bottom: 1rem">Data Centers</p>
+            <div class="energy-bar">
+                <div class="energy-bar-fill" style="width: 0%" data-target="60%"></div>
+            </div>
+            
+            <p style="margin-bottom: 1rem">End User Devices</p>
+            <div class="energy-bar">
+                <div class="energy-bar-fill" style="width: 0%" data-target="45%"></div>
+            </div>
+            
+            <p style="font-size: 0.9rem; margin-top: 2rem; opacity: 0.8">
+                Total Annual Consumption: 416.2 TWh
+            </p>
+        </div>
+    `;
+
+    // Animate the bars when they come into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.energy-bar-fill').forEach(bar => {
+                    const target = bar.dataset.target;
+                    bar.style.width = target;
+                });
+            }
+        });
+    });
+
+    observer.observe(carbonFootprint);
+}
+
+// Call this function after the DOM is loaded
+window.addEventListener('load', initializeDataVisualization);
+
+// Chart.js initialization
+window.addEventListener('load', function() {
+    const canvas = document.getElementById('solutionsChart');
+    if (canvas && canvas.getContext) {
+        const ctx = canvas.getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Renewable Energy', 'E-waste Recycling', 'Energy Efficient Hardware', 'Green Data Centers'],
+                datasets: [{
+                    label: 'Impact Reduction Potential (%)',
+                    data: [45, 20, 15, 20],
+                    backgroundColor: [
+                        'rgba(46, 125, 50, 0.7)',
+                        'rgba(27, 94, 32, 0.7)',
+                        'rgba(56, 142, 60, 0.7)',
+                        'rgba(76, 175, 80, 0.7)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 50
+                    }
+                }
+            }
+        });
+    }
+
+    const impactData = {
+      labels: ['Data Centers', 'Devices', 'Networks', 'Production'],
+      datasets: [{
+        data: [45, 25, 15, 15],
+        backgroundColor: ['#00C853', '#2E7D32', '#1B5E20', '#388E3C']
+      }]
+    };
+    
+    new Chart(document.getElementById('impactPieChart'), {
+      type: 'doughnut',
+      data: impactData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    });
+});
+
+// Smooth scroll animation for navigation
+document.querySelectorAll('nav a').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href');
+    const targetSection = document.querySelector(targetId);
+    targetSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  });
+});
+
+// Animate elements on scroll
+const scrollElements = document.querySelectorAll('.scroll-fade-in');
+const elementInView = (el, percentageScroll = 100) => {
+  const elementTop = el.getBoundingClientRect().top;
+  return (
+    elementTop <= 
+    ((window.innerHeight || document.documentElement.clientHeight) * (percentageScroll/100))
+  );
+};
+
+const displayScrollElement = element => {
+  element.classList.add('visible');
+};
+
+const hideScrollElement = element => {
+  element.classList.remove('visible');
+};
+
+const handleScrollAnimation = () => {
+  scrollElements.forEach((el) => {
+    if (elementInView(el, 70)) {
+      displayScrollElement(el);
+    } else {
+      hideScrollElement(el);
+    }
+  })
+}
+
+// Reveal animation for sections
+function revealOnScroll() {
+  const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  
+  reveals.forEach(element => {
+    const elementTop = element.getBoundingClientRect().top;
+    const elementVisible = 150;
+    
+    if (elementTop < window.innerHeight - elementVisible) {
+      element.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', () => {
+  handleScrollAnimation();
+  revealOnScroll();
+});
+
+</script>
+
+</body>
+</html>
