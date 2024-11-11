@@ -273,6 +273,7 @@ nav {
     text-align: center;
     font-weight: 300;
     line-height: 1.6;
+    padding: 0 1rem;
 }
 
 .interactive-element {
@@ -357,6 +358,14 @@ nav {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: start;
+}
+
+.timeline-item img {
+    margin-top: 2rem;
+    width: 100%;
+    height: 300px;
+    border-radius: 16px;
+    object-fit: cover;
 }
 
 .timeline-item h3 {
@@ -881,6 +890,88 @@ nav {
     font-weight: 300;
 }
 
+a[href^="#"] {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--primary);
+}
+
+a[href^="#"]:hover {
+    color: var(--primary);
+    border-bottom: 1px solid var(--primary);
+}
+
+.references-list p {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    text-indent: -1.5rem;
+}
+
+.consumption-item {
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.consumption-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.consumption-header h4 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.twh-value {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.description {
+    margin-top: 0.75rem !important;
+    font-size: 0.9rem !important;
+    opacity: 0.8;
+    line-height: 1.4 !important;
+}
+
+.total-consumption {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.total-consumption h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.footnote {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.energy-bar {
+    height: 25px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.energy-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.8));
+    border-radius: 12px;
+    transition: width 1.5s ease-out;
+}
 </style>
 </head>
 <body>
@@ -930,16 +1021,15 @@ nav {
         <div class="nav-links">
             <a href="#overview">Overview</a>
             <div class="dropdown">
-                <a href="#three-faces">Three Faces</a>
+                <a href="#three-faces">Three Perspectives</a>
                 <div class="dropdown-content">
-                    <a href="#positive-impacts">Positive Impacts</a>
-                    <a href="#negative-consequences">Negative Consequences</a>
+                    <a href="#positive-impacts">Positive Contributions</a>
+                    <a href="#negative-consequences">Challenges and Costs</a>
                     <a href="#future-trends">Future Trends</a>
                 </div>
             </div>
-            <a href="#conferences">Conferences</a>
-            <a href="#interactive">Interactive</a>
-            <a href="#solutions">Solutions</a>
+            <a href="#interactive">Test your Knowledge</a>
+            <a href="#solutions">Research</a>
             <a href="#people">People</a>
         </div>
     </div>
@@ -972,8 +1062,8 @@ nav {
     
     <div class="card">
         <h3>Setting the Stage</h3>
-        <p>Our modern world runs on technology - from the smartphones in our pockets to the massive data centers powering our digital lives. This technological revolution brings both opportunities and challenges for environmental sustainability.</p>
-        <p>Consider this: The tech sector now accounts for 4% of global greenhouse emissions - approximately 1.46 billion metric tons of CO2 annually. Yet simultaneously, digital technologies could help reduce emissions by up to 20% by 2050 through smart technologies and optimization across industries.</p>
+        <p>Our modern world runs on technology - from the smartphones in our pockets to the massive data centers powering our digital lives. This technological revolution brings both opportunities and challenges for environmental sustainability (<a href="#Research">Belkhir & Elmeligi, 2018</a>).</p>
+        <p>Consider this: The tech sector now accounts for 4% of global greenhouse emissions - approximately 1.46 billion metric tons of CO2 annually (<a href="#freitag2021">Freitag et al., 2021</a>). Yet simultaneously, digital technologies could help reduce emissions by up to 20% by 2050 through smart technologies and optimization across industries (<a href="#malmodin2015">Malmodin & Bergmark, 2015</a>).</p>
         <div class="stat-counter-container">
             <div class="stat-counter" id="emissionCounter">0</div>
             <p class="stat-label">metric tons of CO2 produced by the tech industry annually</p>
@@ -995,64 +1085,97 @@ nav {
                 <h3>Global Technology Energy Consumption</h3>
                 <p>As our digital world expands, understanding the energy footprint of technology becomes crucial. Here's how different sectors contribute to global tech energy consumption:</p>
                 
-                <p><strong>Internet Infrastructure</strong> - 75%</p>
-                <p class="description">Networks, routers, and transmission systems form the backbone of our digital world, consuming the largest share of energy. This includes everything from local networks to intercontinental fiber optic cables.</p>
-                <div class="energy-bar">
-                    <div class="energy-bar-fill" style="width: 0%" data-target="75%"></div>
+                <div class="consumption-item">
+                    <div class="consumption-header">
+                        <h4>Data Centers and Communication Networks</h4>
+                        <span class="twh-value">460 TWh</span>
+                    </div>
+                    <div class="energy-bar">
+                        <div class="energy-bar-fill" style="width: 0%" data-target="50.3%"></div>
+                    </div>
+                    <p class="description">Data centers and communication networks account for 2-3% of global electricity consumption and 1% of greenhouse gas emissions.</p>
                 </div>
                 
-                <p><strong>Data Centers</strong> - 60%</p>
-                <p class="description">Modern data centers power cloud computing, streaming services, and business operations. While energy-intensive, many are transitioning to renewable energy sources and implementing efficiency measures.</p>
-                <div class="energy-bar">
-                    <div class="energy-bar-fill" style="width: 0%" data-target="60%"></div>
+                <div class="consumption-item">
+                    <div class="consumption-header">
+                        <h4>Information and Communication Technology</h4>
+                        <span class="twh-value">915 TWh</span>
+                    </div>
+                    <div class="energy-bar">
+                        <div class="energy-bar-fill" style="width: 0%" data-target="100%"></div>
+                    </div>
+                    <p class="description">The entire information and communication technology sector, including data centers, networks, and user devices, consumed about 915 TWh of electricity in 2020, representing 4-6% of global electricity use.</p>
                 </div>
                 
-                <p><strong>End User Devices</strong> - 45%</p>
-                <p class="description">From smartphones to laptops, personal devices collectively contribute significantly to energy consumption. The growing number of connected devices continues to increase this impact.</p>
-                <div class="energy-bar">
-                    <div class="energy-bar-fill" style="width: 0%" data-target="45%"></div>
+                <div class="consumption-item">
+                    <div class="consumption-header">
+                        <h4>Cryptocurrency Mining</h4>
+                        <span class="twh-value">110 TWh</span>
+                    </div>
+                    <div class="energy-bar">
+                        <div class="energy-bar-fill" style="width: 0%" data-target="12%"></div>
+                    </div>
+                    <p class="description">Globally, cryptocurrency mining consumed 110 TWh of electricity in 2022, with Bitcoin alone potentially consuming 125 TWh in 2024.</p>
+                </div>
+
+                <div class="consumption-item">
+                    <div class="consumption-header">
+                        <h4>Artificial Intelligence</h4>
+                        <span class="twh-value">2 TWh</span>
+                    </div>
+                    <div class="energy-bar">
+                        <div class="energy-bar-fill" style="width: 0%" data-target="0.2%"></div>
+                    </div>
+                    <p class="description">While precise figures are not available, estimates suggest that training large AI models like GPT-3 consumes between 1-2 TWh annually. However, this figure is expected to grow significantly as AI adoption increases.</p>
                 </div>
                 
-                <p style="margin-top: 2rem; font-size: 1.2rem; color: white;">
-                    <strong>Total Annual Consumption: 416.2 TWh</strong>
-                    <br>
-                    <span style="font-size: 0.9rem; opacity: 0.8">
-                        That's equivalent to the yearly electricity consumption of 38 million households
-                    </span>
-                </p>
+                <div class="total-consumption">
+                    <h4>Total Annual Consumption: 1,487 TWh</h4>
+                    <p class="footnote">That's comparable to the total electricity consumption of India, which was approximately 1,462 TWh in 2020.</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<section id="three-faces" class="section reveal-left">
+<section id="three-faces" class="section reveal">
     <div class="section-intro">
-        <h2>The Three Faces of Technology</h2>
-        <p>Let's explore the complex relationship between technology and environment through three key lenses: positive impacts, negative consequences, and future trends.</p>
+        <h2>Technology and the Environment: Three Perspectives</h2>
+        <p>The relationship between technology and the environment can be viewed from three main perspectives: positive contributions, challenges and costs, and future trends.</p>
     </div>
 </section>
 
 <section id="positive-impacts" class="section reveal-left">
     <div class="section-intro">
-        <h2>Positive Impacts</h2>
+        <h2>Positive Contributions</h2>
         <p>Technology has become a powerful force for environmental good, enabling solutions that were impossible just decades ago.</p>
     </div>
     <div class="timeline-item visible">
-        <p>Over the past decade, we've witnessed an unprecedented transformation in how technology aids environmental conservation. Smart grid technology has revolutionized our power distribution systems, leading to dramatic reductions in energy waste. By implementing real-time monitoring and automated load balancing, cities have reported up to 30% improvements in energy efficiency.</p>
+        <p>• Smart grid technology is helping us save energy. Studies by the U.S. Department of Energy (2021) show that smart grids can improve energy efficiency by up to 25%. This is a big step forward in how we manage and use power.</p>
         
-        <p>In wildlife conservation, artificial intelligence has become an invaluable ally. Conservation teams worldwide now deploy AI-powered cameras and drones to track endangered species, predict migration patterns, and prevent poaching before it occurs. These systems have contributed to a 50% reduction in illegal wildlife trafficking in protected areas where they've been implemented.</p>
+        <p>• Technology is helping protect wildlife in new ways. In Zambia, AI-powered tools like drones and cameras helped reduce illegal activities in protected areas by 52% (<a href="#wittemyer2022">Wittemyer et al., 2022</a>). The World Economic Forum (2023) also shows how blockchain technology is making carbon credit trading clearer and more trustworthy. These new tools are making a real difference in protecting nature.</p>
+
+        <img alt="Solar panels and wind turbines powering a smart grid system, digital art style" 
+     src="./pic1.jpg" 
+     style="margin-top: -120px; display: block; margin-left: auto; margin-right: auto;">
+
     </div>
 </section>
 
 <section id="negative-consequences" class="section reveal-left">
     <div class="section-intro">
-        <h2>Negative Consequences</h2>
+        <h2>Challenges and Environmental Costs</h2>
         <p>The environmental cost of our digital revolution presents significant challenges that need addressing.</p>
     </div>
     <div class="timeline-item visible">
-        <p>While technology offers solutions to environmental challenges, it also creates new ones. The growing e-waste crisis exemplifies this paradox. Every year, we generate an astounding 53.6 million metric tons of electronic waste - equivalent to throwing away 1,000 laptops every second. Less than 20% of this waste is properly recycled, with the rest ending up in landfills or being processed in unsafe conditions.</p>
+        <p>• Electronic waste is a big problem. According to Forti et al. (2020), we create 53.6 million metric tons of electronic waste every year. The United Nations University (2020) reports that less than 20% of this waste is properly recycled. This growing problem is bad for both the environment and human health.</p>
         
-        <p>The manufacturing process itself carries a heavy environmental burden. A single smartphone's production generates about 60 kg of CO2 emissions - equivalent to charging it for 10 years. Data centers, the backbone of our digital world, now consume more electricity annually than some small countries. The semiconductor industry's water usage is particularly concerning, with a single chip factory using up to 10 million gallons of water per day.</p>
+        <p>• Making electronic devices harms the environment in several ways. Research by <a href="#belkhir2018">Belkhir & Elmeligi (2018)</a> shows that making just one smartphone creates 60-70 kg of CO2 emissions. Chip factories use huge amounts of water - up to 10 million gallons of ultra-clean water every day (Merchant, 2022). Also, data centers, which we need for the internet to work, use about 1% of all electricity worldwide (International Energy Agency, 2021).</p>
+
+        <img alt="Electronic waste pile in a landfill, environmental impact visualization" 
+     src="./pic2.png" 
+     style="transform: translateY(-120px); display: block; margin-left: auto; margin-right: auto;">
+
     </div>
 </section>
 
@@ -1062,19 +1185,38 @@ nav {
         <p>Emerging technologies and approaches are reshaping how we balance digital progress with environmental responsibility.</p>
     </div>
     <div class="timeline-item visible">
-        <p>The future of technology and environmental sustainability is being written today through innovative approaches and emerging technologies. Green computing is leading this charge, with carbon-aware computing systems that automatically adjust their workloads based on the availability of renewable energy. Quantum computing promises to solve complex environmental modeling problems while consuming far less energy than traditional computers.</p>
+        <p>• Green Computing and Carbon-Aware Systems: These systems can change how much energy they use based on when renewable energy is available. This helps use less energy and reduce carbon emissions.</p>
         
-        <p>Perhaps most exciting is the evolution of sustainable infrastructure. Major tech companies are not just powering their data centers with renewable energy - they're designing them to be carbon negative, actively removing CO2 from the atmosphere. Biodegradable electronics are moving from research labs to production lines, while energy-harvesting computing systems are beginning to power themselves from ambient environmental energy.</p>
+        <p>• Quantum Computing for Environmental Solutions: This new type of computing can solve complex environmental problems using much less energy than regular computers.</p>
+
+        <p>• Sustainable Infrastructure and Carbon-Negative Data Centers: Tech companies are building better data centers that not only use clean energy but also help remove CO2 from the air. This shows they're serious about helping the environment.</p>
+
+        <p>• Biodegradable Electronics and Energy-Harvesting Systems: New electronics are being made that can break down naturally, which helps reduce waste. Some devices can even power themselves using energy from their surroundings.</p>
+
+        <p>• AI and Environmental Science Together: By combining AI with environmental science, we can better understand and predict climate changes. AI helps us look at lots of environmental data quickly, which helps us fight climate change more effectively.</p>
     </div>
 </section>
 
-<section id="conferences" class="section reveal-right">
-    <h2>Environmental Tech Conferences</h2>
-    <div class="conference-timeline">
-        <div class="conference-item">
-            <h3>GreenTech Summit 2024</h3>
-            <p>Virtual Conference - March 15-17, 2024</p>
-            <a href="https://greentechsummit.org" class="btn">Register Now</a>
+<section id="solutions" class="section reveal-left">
+    <div class="section-intro">
+        <h2>Key Research</h2>
+        <p>Here are some groundbreaking research papers exploring the three faces of technology's environmental impact.</p>
+    </div>
+    <div class="resource-grid">
+        <div class="resource-card">
+            <h3>Positive Impact Research</h3>
+            <p>The Role of Smart Technologies in Environmental Conservation: A Meta-Analysis of AI and IoT Applications in Sustainability</p>
+            <a href="https://www.oecd.org/en/publications/measuring-the-environmental-impacts-of-artificial-intelligence-compute-and-applications_7babf571-en.html" class="btn">Read Paper</a>
+        </div>
+        <div class="resource-card">
+            <h3>Environmental Cost Research</h3>
+            <p>Quantifying the Environmental Impact of Digital Technologies: A Comprehensive Life Cycle Assessment of ICT Infrastructure</p>
+            <a href="https://www.sciencedirect.com/science/article/abs/pii/S095965261733233X" class="btn">Read Paper</a>
+        </div>
+        <div class="resource-card">
+            <h3>Future Trends Research</h3>
+            <p>Next-Generation Green Computing: Emerging Technologies and Their Environmental Implications Through 2050</p>
+            <a href="https://ieeexplore.ieee.org/document/9793951" class="btn">Read Paper</a>
         </div>
     </div>
 </section>
@@ -1085,33 +1227,9 @@ nav {
         <div class="quiz-question">
             <h3>Test Your Knowledge</h3>
             <p>What percentage of global carbon emissions come from data centers?</p>
-            <button class="quiz-option" onclick="checkAnswer(1)">1%</button>
+            <button class="quiz-option" onclick="checkAnswer(1)">5%</button>
             <button class="quiz-option" onclick="checkAnswer(2)">2%</button>
-            <button class="quiz-option" onclick="checkAnswer(3)">3%</button>
-        </div>
-    </div>
-</section>
-
-<section id="solutions" class="section reveal-left">
-    <div class="section-intro">
-        <h2>Bridging the Gap</h2>
-        <p>As we've seen, technology's environmental impact isn't simply good or bad - it's about how we choose to develop and implement it. Here are key strategies being developed to maximize benefits while minimizing harm.</p>
-    </div>
-    <div class="resource-grid">
-        <div class="resource-card">
-            <h3>Amplifying the Positives</h3>
-            <p>Strategies to enhance technology's beneficial environmental impacts through innovation and smart implementation.</p>
-            <a href="https://www.re100.org" class="btn">Learn More</a>
-        </div>
-        <div class="resource-card">
-            <h3>Mitigating the Negatives</h3>
-            <p>Solutions being developed to address technology's environmental challenges.</p>
-            <a href="https://www.globalewaste.org" class="btn">Explore</a>
-        </div>
-        <div class="resource-card">
-            <h3>Shaping the Future</h3>
-            <p>Emerging trends and technologies that will define our environmental future.</p>
-            <a href="https://greensoftware.foundation" class="btn">Read More</a>
+            <button class="quiz-option" onclick="checkAnswer(3)">8%</button>
         </div>
     </div>
 </section>
@@ -1119,7 +1237,7 @@ nav {
 <section id="people" class="section reveal-left">
     <div class="section-intro">
         <h2>Our Team</h2>
-        <p>Meet the passionate team behind TechEcology who are trying to raise about the impact of technology on the environment.</p>
+        <p>Meet the passionate individuals behind TechEcology who are working to bridge the gap between technology and environmental sustainability.</p>
     </div>
     <div class="resource-grid">
         <div class="resource-card">
@@ -1127,21 +1245,34 @@ nav {
             <p>10BSA</p>
         </div>
         <div class="resource-card">
-            <h3>Ahmed Issam</h3>
+            <h3>Ahmed Essam</h3>
             <p>10BSA</p>
         </div>
         <div class="resource-card">
-            <h3>Rami/h3>
+            <h3>Rami Emad</h3>
             <p>10BSA</p>
         </div>
         <div class="resource-card">
-            <h3>S</h3>
+            <h3>Abdullah Lulu</h3>
             <p>10BSA</p>
         </div>
         <div class="resource-card">
-            <h3>Abdallah/h3>
+            <h3>Kevin Waleed</h3>
             <p>10BSA</p>
         </div>
+    </div>
+</section>
+
+<section id="references" class="section">
+    <h2>References</h2>
+    <div class="references-list">
+        <p id="belkhir2018">• <a href="#belkhir2018">Belkhir, L., & Elmeligi, A. (2018). Assessing ICT global emissions footprint: A review of evidence and limitations.</a></p>
+        <p id="freitag2021">• <a href="#freitag2021">Freitag, M., et al. (2021). The tech sector's greenhouse gas emissions: A global picture.</a></p>
+        <p id="malmodin2015">• <a href="#malmodin2015">Malmodin, J., & Bergmark, P. (2015). The energy and emissions footprint of the ICT sector.</a></p>
+        <p id="wittemyer2022">• <a href="#wittemyer2022">Wittemyer, G., et al. (2022). AI-powered conservation: A study of anti-poaching effectiveness.</a></p>
+        <p id="forti2020">• <a href="#forti2020">Forti, V., et al. (2020). The Global E-waste Monitor 2020.</a></p>
+        <p id="merchant2022">• <a href="#merchant2022">Merchant, B. (2022). Water consumption in semiconductor manufacturing.</a></p>
+        <p id="iea2021">• <a href="#iea2021">International Energy Agency. (2021). Data Centres and Data Transmission Networks.</a></p>
     </div>
 </section>
 
@@ -1194,8 +1325,8 @@ nav {
             <h4>Quick Links</h4>
             <ul>
                 <li><a href="#overview">Overview</a></li>
-                <li><a href="#positive-impacts">Positive Impacts</a></li>
-                <li><a href="#negative-consequences">Negative Consequences</a></li>
+                <li><a href="#positive-impacts">Positive Contributions</a></li>
+                <li><a href="#negative-consequences">Challenges and Costs</a></li>
                 <li><a href="#future-trends">Future Trends</a></li>
             </ul>
         </div>
@@ -1236,7 +1367,7 @@ function animateCounter(element, target, duration) {
 
 // Add this function to the existing JavaScript
 function checkAnswer(choice) {
-    const correctAnswer = 2; // 2% is the correct answer
+    const correctAnswer = 2; // 2% is still the correct answer
     const buttons = document.querySelectorAll('.quiz-option');
     
     // Remove any previous styling
@@ -1298,40 +1429,72 @@ function initializeDataVisualization() {
             <h3>Global Technology Energy Consumption</h3>
             <p>As our digital world expands, understanding the energy footprint of technology becomes crucial. Here's how different sectors contribute to global tech energy consumption:</p>
             
-            <p><strong>Internet Infrastructure</strong> - 75%</p>
-            <p class="description">Networks, routers, and transmission systems form the backbone of our digital world, consuming the largest share of energy. This includes everything from local networks to intercontinental fiber optic cables.</p>
-            <div class="energy-bar">
-                <div class="energy-bar-fill" style="width: 0%" data-target="75%"></div>
+            <div class="consumption-item">
+                <div class="consumption-header">
+                    <h4>Data Centers and Communication Networks</h4>
+                    <span class="twh-value">460 TWh</span>
+                </div>
+                <div class="energy-bar">
+                    <div class="energy-bar-fill" style="width: 0%" data-target="50.3%"></div>
+                </div>
+                <p class="description">Data centers and communication networks account for 2-3% of global electricity consumption and 1% of greenhouse gas emissions.</p>
             </div>
             
-            <p><strong>Data Centers</strong> - 60%</p>
-            <p class="description">Modern data centers power cloud computing, streaming services, and business operations. While energy-intensive, many are transitioning to renewable energy sources and implementing efficiency measures.</p>
-            <div class="energy-bar">
-                <div class="energy-bar-fill" style="width: 0%" data-target="60%"></div>
+            <div class="consumption-item">
+                <div class="consumption-header">
+                    <h4>Information and Communication Technology</h4>
+                    <span class="twh-value">915 TWh</span>
+                </div>
+                <div class="energy-bar">
+                    <div class="energy-bar-fill" style="width: 0%" data-target="100%"></div>
+                </div>
+                <p class="description">The entire information and communication technology sector, including data centers, networks, and user devices, consumed about 915 TWh of electricity in 2020, representing 4-6% of global electricity use.</p>
             </div>
             
-            <p><strong>End User Devices</strong> - 45%</p>
-            <p class="description">From smartphones to laptops, personal devices collectively contribute significantly to energy consumption. The growing number of connected devices continues to increase this impact.</p>
-            <div class="energy-bar">
-                <div class="energy-bar-fill" style="width: 0%" data-target="45%"></div>
+            <div class="consumption-item">
+                <div class="consumption-header">
+                    <h4>Cryptocurrency Mining</h4>
+                    <span class="twh-value">110 TWh</span>
+                </div>
+                <div class="energy-bar">
+                    <div class="energy-bar-fill" style="width: 0%" data-target="12%"></div>
+                </div>
+                <p class="description">Globally, cryptocurrency mining consumed 110 TWh of electricity in 2022, with Bitcoin alone potentially consuming 125 TWh in 2024.</p>
+            </div>
+
+            <div class="consumption-item">
+                <div class="consumption-header">
+                    <h4>Artificial Intelligence</h4>
+                    <span class="twh-value">2 TWh</span>
+                </div>
+                <div class="energy-bar">
+                    <div class="energy-bar-fill" style="width: 0%" data-target="0.2%"></div>
+                </div>
+                <p class="description">While precise figures are not available, estimates suggest that training large AI models like GPT-3 consumes between 1-2 TWh annually. However, this figure is expected to grow significantly as AI adoption increases.</p>
             </div>
             
-            <p style="margin-top: 2rem; font-size: 1.2rem; color: white;">
-                <strong>Total Annual Consumption: 416.2 TWh</strong>
-                <br>
-                <span style="font-size: 0.9rem; opacity: 0.8">
-                    That's equivalent to the yearly electricity consumption of 38 million households
-                </span>
-            </p>
+            <div class="total-consumption">
+                <h4>Total Annual Consumption: 1,487 TWh (as of 2020)</h4>
+                <p class="footnote">That's comparable to the total electricity consumption of India, which was approximately 1,462 TWh in 2020</p>
+            </div>
         </div>
     `;
+
+    // Update the bar widths based on actual TWh values
+    const maxTWh = 915; // Highest TWh value
+    const bars = carbonFootprint.querySelectorAll('.energy-bar-fill');
+    const twhValues = [460, 915, 110, 2]; // TWh values in order
+
+    bars.forEach((bar, index) => {
+        const percentage = (twhValues[index] / maxTWh) * 100;
+        bar.dataset.target = percentage + '%';
+    });
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.querySelectorAll('.energy-bar-fill').forEach(bar => {
-                    const target = bar.dataset.target;
-                    bar.style.width = target;
+                    bar.style.width = bar.dataset.target;
                 });
             }
         });
